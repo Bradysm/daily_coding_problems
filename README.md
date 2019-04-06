@@ -6,7 +6,7 @@ Join me by solving a problem a day to help us all reach interviews with top tech
 
 # What to expect
 1. One coding problem to be completed and pushed to this repository everyday
-    the problem will directly come from Daily Coding Problem, HackerRanked, LeetCode, CodeFights, etc
+    - the problem will directly come from Daily Coding Problem, HackerRanked, LeetCode, CodeFights, etc
 2. Problem definition in comments at the top of the file
 3. Detailed explination on various answers that I arrived at (I will try to include my best, as well as brute force solutions)
 4. You to increase your coding skills and problem knowledge
