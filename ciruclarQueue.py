@@ -19,6 +19,17 @@
 # isEmpty(): Checks whether the circular queue is empty or not.
 # isFull(): Checks whether the circular queue is full or not.
 
+# the key to implementing a ciruclar queue is that there are n positions, but there are n+2 states
+# if there were n+1 states, that would be fine, but we need to allow for the other state
+# (i.e. if back is one space behind front, is it full or empty?)
+# as a result of this, you want to add an extra space to the underlying array in your implementation
+# if the back is now one less than the front, then we know the queue is empty, and if the back is
+# two less than the front, then we know the queue is full
+
+# the last implementation detail is that it's CIRUCLAR. As a result, we need to be using the mod function
+# when we're incrementing value that represent the front and back index. This will ensure the values
+# "wrap around" the queue. Once you understand these concepts, the rest becomes trivial.
+
 class MyCircularQueue(object):
 
     def __init__(self, k):
