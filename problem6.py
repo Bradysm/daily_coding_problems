@@ -42,7 +42,7 @@ def decode_help(msg, arr, i):
         arr: list - list of calculated values
         i: int - integer representing the index of the string we're at"""
     if i == len(msg): return 1  # this is one way to count
-    if arr[i] is not -1: return arr[i]  # we've already calculated the value
+    if not arr[i] == -1: return arr[i]  # we've already calculated the value
 
     # count the number of ways from i
     count_i = 0
