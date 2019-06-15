@@ -5,26 +5,39 @@
 # Using a function rand7() that returns an integer from 1 to 7 (inclusive) with uniform probability,
 # implement a function rand5() that returns an integer from 1 to 5 (inclusive)
 
-# lets talk about how I came up with this answer
-# first, you need to understand how we come up with probability
-# So generic undersating of probability is needed to do this problem
-# Since we want to have an even distribution of numbers produced from rand5
-# we want to make sure that 1-5, each number has a 20% chance of being picked
-# Since we're given a function that has a uniform probability distribution
-# from 1-7, we need to "shrink" that distribtuion back down to 1-5. So,
-# how can we do this? Well first we can think about "extending" the range
-# of numbers that are being produced as a multiple of 5. So we will
-# take the random function and multiply it by 5, so 1-5 would represent
-# the choice of 1 from rand7 etc etc. Once we have this, we will be producing
-# numbers 1-35. We need to then tranform this to 1-5. To do this, you should
-# immediately think of using the mod function. But wait Brady, this will
-# produce the numbers 0-4!!!!!
+# this problem is not very challenging because they give us a range that is greater
+# than the range that we are trying to land within.
+# we simply need to generate a number, using rand7, this will give us a number between
+# 1-7, if the number is greater than 5, then we will simply discard the value
+# and try again. Technically in the worst case this will never happen, but the probability
+# of hitting 6 or 7 consistently forever is almost zero. This acts like rejection sampling
+# in AI. I have provided a test that you can run. The numbers fluctuate ~ +/-15 from 200.
+# thus empirically proving the uniform distribution.
 
-# stay patient, all you have to do is add 1, and now the output range will be
-# between 1-5!!!! so if you enumerate all of the probabilities, each number
-# 1-5 will show up 7 times from the mapping that we created, thus each number
-# has a probability of 7/35 or 1/5 which is 20%!!! There you go. Ez pz.
+
+import random
+from collections import Counter
+
+
+def rand7():
+    return random.randint(1, 7)
+
 
 def rand5(rand7):
-    return ((rand7() * 5) % 5) + 1
+    num = rand7()
+    while num > 5:
+        num = rand7()
+    return num
+
+
+# test to make sure it's working
+c = Counter()
+for n in range(1000):
+    c[rand5(rand7)] += 1
+
+# print the number of times the number showed
+for k, v in c.items():
+    print(k, v)
+
+
 
