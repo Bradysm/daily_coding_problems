@@ -97,4 +97,30 @@ t = [1, 100, 5, 6, 7]
 print(lis(t))
 
 
-# here is the O(n^2) solutuon. This will used cached sequence value...
+# here is the O(n^2) solutuon. This will used cached sequence value to "build" the solution
+# The whole premise of this problem is that we will build the solution up from subproblems
+
+# lets think about the problem, so if we're at index i, the only subsequence that metters to index
+# i is the sequence from 0 - (i-1). Thus, from every j in that range, if the value at nums[j] is < nums[i]
+# then we know that this is a potential for a new greater subsequence. We then take the max of lis[j]+1 and lis[i]
+# and place that into lis[i]. We add one to lis[j] because it's like were adding nums[i] to the sequence
+# that gave us the value lis[j]
+# this will run in O(n^2) time and will take O(n) extra space for the array
+
+def lis2(nums):
+    lis = [1] * len(nums) # this will contain the lis for every index. Technically the LIS is one ATM
+
+    # go through each index less than the current one, and if the number is less 
+    for i in range(len(nums)):
+        for j in range(i):
+            if nums[j] < nums[i]: lis[i] = max(lis[i], lis[j] + 1)
+    
+    return max(lis)
+
+print("\nThird test:")
+t = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+print(lis2(t))
+t = [1, 5, 2, 80, 6, 90, 10, 11]
+print(lis2(t))
+t = [1, 100, 5, 6, 7]
+print(lis2(t))
