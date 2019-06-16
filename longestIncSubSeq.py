@@ -25,6 +25,12 @@
 # to not add it, you will get 2 instead of 4 for this test case. So it's important
 # to almost think of it like a powerset and to choose to include it or not.
 
+# notice for this solution we do not carry the whole sequence. For the next
+# solution I will show why carrying the whole sequence might be a good idea for
+# certain problems. For this problem, adding the ith number only relies on
+# the i-1 value, thus we just need to maintain the i-1 value and not
+# the whole sequence.
+
 import sys
 
 def longest_inc_sub(nums):
