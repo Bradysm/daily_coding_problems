@@ -23,6 +23,10 @@
 # from each column. The runtime is O(n^n)
 # this is not great at all haha
 
+# we also know that all solutions are unique because each state is determined
+# by the prior decision. Since we only make prior decisions once, we know
+# the current state is unique, and thus all solutions are unique
+
 def n_queens(n):
     p = [-1 for i in range(n)]
     return eq_help(0, p, n)
