@@ -13,7 +13,7 @@
 # if it is pop of the end of the stack. If the length of the stack is == 0, then we add one to removed
 # because that closing paren cannot be there. Okay, great that's O(n) space and time. Let's do better
 # if you noticed we used the stack, but really didn't care about what was in there, we only cared about
-# the length because we solely put one paren into it. So, we could exchange the stack for an int called open
+# the length because we solely put one type of paren into it. So, we could exchange the stack for an int called open
 # we will then use this as the "stack" and increment it when we see open parens and decrement when we see closing ones
 # (assuming it's greater than 0)
 
