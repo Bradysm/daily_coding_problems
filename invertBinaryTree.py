@@ -38,17 +38,32 @@
 # the tree and you keep going until you get to null, and then you work your way back up the tree!
 # finally, you return the root node. Ez pz.
 
-def invertTree(self, root):
+def invertTree(root):
     """
     :type root: TreeNode
     :rtype: TreeNode
     """
     if root is None: return root
-    temp = root.right
-    root.right = root.left
-    root.left = temp
-        
+    swap_children(root)
     # invert the children
-    self.invertTree(root.right)
-    self.invertTree(root.left)
+    invertTree(root.right)
+    invertTree(root.left)
     return root
+
+
+# iterative solution
+def invertBinaryTree(tree):
+    queue = [tree]
+    while len(queue) > 0:
+		node = queue.pop() # get the first node
+		if node is not None:
+			swap_children(node)
+			queue.append(node.left)
+			queue.append(node.right)
+    return tree
+
+
+def swap_children(node):
+    temp = node.right
+    node.right = node.left
+    node.left = temp
