@@ -44,3 +44,44 @@ test_nums2 = [1, 10, 8, 15, 0, 5, 12, 14, 16, 2, 4, 3, 11, 13, 9]
 
 print(longest_range(test_nums))
 print(longest_range(test_nums2))
+
+
+# lets do even better! 
+# to do this we will use a map. We will fill all the numnbers into a map and set the value to false
+# The false means that we havent' checked over this number before. You will understand why we do this
+# and don't just use a set when I explain it. THe first pass we create the map, the second pass we 
+# move through the array and find the longest range. WHat we do there is start at the number and 
+# check to see if there are numbers before it and numbers after it that belong in the range. 
+# when we do this, we check in the map. We want to turn the value to true when we visit that value
+# so we don't try to iterate over that range again. The reason I say this is that imagine the input
+# was a sorted array that was also filled with consecutive numbers. Then we would check over it n^2 times
+# if we didn't store whether we saw that value yet or not. We really don't want to do this. If we've seen
+# the value, MOVE ON, Kapeesh. Good. We have the algo let's get it together
+
+def expand_range(num: int, visited_nums: dict) -> int: 
+    curr_range = 1 # just counting the current number
+    val = num - 1
+    while val in visited_nums and not visited_nums[val]:
+        curr_range += 1
+        visited_nums[val] = True # visit the value
+        val -= 1
+    val = num + 1
+    while val in visited_nums and not visited_nums[val]:
+        curr_range += 1
+        visited_nums[val] = True # visit the value
+        val += 1
+    return curr_range
+
+
+def longest_range_fast(nums) -> int:
+    visited_num = {n : False for n in nums} # create the map
+    longest_range = 0
+    for n in nums:
+        if not  visited_num[n]: # check to make sure we haven't visited it
+            longest_range = max(longest_range, expand_range(n, visited_num))
+
+    return longest_range
+
+
+print(longest_range_fast(test_nums))
+print(longest_range_fast(test_nums2))
