@@ -17,11 +17,13 @@
 # if we're at a number > k and that is < ceil, then we make ceil point to that
 # node because it makes the range tighter to K!!!!! See, that's not too bad. We then continue acting in the
 # way that we're searching for K, and continue updating the range until we get to k, or until we get to a leaf in
-# the tree. Once we get to a leaf in the tree, we return the value.
+# the tree. Once we get to a leaf in the tree, we return the value. We also know the ranges that we're generating
+# are correct because the moevements in a BST move us CLOSER to the value k that we're looking for. So moving in the
+# other direction will not give us a range closer to the value k (we're always acting opitmally)
 
 from tree import Tree
 
-
+# recursive implementation O(d) time and space
 def floor_and_ceil(root: Tree, k: int, ceil: Tree, floor: Tree):
     if root is None: return ceil, floor
     if root.value == k: # we found 
@@ -38,4 +40,26 @@ tree = Tree(10, Tree(20, Tree(31), Tree(19)), Tree(4, Tree(7, Tree(9), Tree(5)),
 
 this_ceil, this_floor = floor_and_ceil(tree, 6, None, None)
 print('ceil val:', this_ceil.value)
+print('floor val:', this_floor.value)
+
+
+# iterative implementation
+# O(d) time d being the depth of the path searching for k, O(1) space
+
+def iterative_floor_ceil(root: Tree, k: int):
+    floor = ceil = None
+    while root is not None:
+        if root.value == k: # we found k
+            return root, root
+        elif root.value > k: # current value is greater than root
+            ceil = root if (ceil is None or root.value < ceil.value) else ceil
+            root = root.left
+        else: # current value is < root
+            floor = root if (floor is None or root.value > floor.value) else floor
+            root = root.right
+    return ceil, floor
+
+this_ceil, this_floor = iterative_floor_ceil(tree, 33)
+print('Iterative solution: ')
+print('ceil val:', this_ceil) # there is no ceiling only a floor
 print('floor val:', this_floor.value)
