@@ -6,7 +6,8 @@
 # L represents that the domino is falling to the left side
 # R represents that the domino is falling to the right side
 
-# Figure out the final position of the dominoes. If there are dominoes that get pushed on both ends, the force cancels out and that domino remains upright.
+# Figure out the final position of the dominoes. 
+# If there are dominoes that get pushed on both ends, the force cancels out and that domino remains upright.
 
 # Example:
 # Input:  ..R...L..R.
@@ -57,15 +58,19 @@ def push_dominos(dominos):
 def attemptPushRight(action_i, res_dominos, queue):
     update_i = action_i + 1
     # check to make sure the updated index is within bounds and next is not falling left
-    if update_i < len(res_dominos) and (update_i+1 == len(res_dominos) or res_dominos[update_i+1] is not 'L'):
-        res_dominos[update_i] = 'R' # update to falling right
-        queue.append(update_i)
+    if update_i < len(res_dominos) and res_dominos[update_i] is '.': # check to make sure unvisited
+        if (update_i+1 == len(res_dominos) or res_dominos[update_i+1] is not 'L'):
+            res_dominos[update_i] = 'R' # update to falling right
+            queue.append(update_i)
 
 def attemptPushLeft(action_i, res_dominos, queue):
     update_i = action_i - 1
-    if update_i > -1 and (update_i-1 < 0  or res_dominos[update_i-1] is not 'R'):
-        res_dominos[update_i] = 'L' # update to falling right
-        queue.append(update_i)
+    if update_i > -1 and res_dominos[update_i] is '.':
+        if (update_i-1 < 0  or res_dominos[update_i-1] is not 'R'):
+            res_dominos[update_i] = 'L' # update to falling right
+            queue.append(update_i)
 
 test = '..R...L..R.'
+test2 = '.R...LRR...L'
 print(push_dominos(test))
+print(push_dominos(test2))
