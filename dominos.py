@@ -37,6 +37,10 @@
 # this will give us O(n) time and space because we create the queue and in the worst case will have to update
 # every index of the dominos
 
+# remember, this stuff is not easy. Don't get discouraged if you can't solve the problem or if you
+# don't get it in the same time complexity. It takes a while to get good at interviewing and I'm not at
+# the "master" level that I want to be at either. Just take it one day at a time and one problem at a time
+
 
 def push_dominos(dominos):
     res_dominos = [domino for domino in dominos]
