@@ -41,19 +41,16 @@
 # remember, this stuff is not easy. Don't get discouraged if you can't solve the problem or if you
 # don't get it in the same time complexity. It takes a while to get good at interviewing and I'm not at
 # the "master" level that I want to be at either. Just take it one day at a time and one problem at a time
-from copy import deepcopy
-
 def push_dominos(dominos):
     res_dominos = [domino for domino in dominos]
     queue = [i for i, domino in enumerate(dominos) if not domino == '.']
 
     while len(queue) > 0: # iterate over the changes
-        updated = deepcopy(res_dominos)
         action_i = queue.pop(0)
         if res_dominos[action_i] == 'R': # check to see if falling right
-            attemptPushRight(action_i, res_dominos, updated, queue)    
+            attemptPushRight(action_i, res_dominos, queue)    
         if res_dominos[action_i] == 'L':
-            attemptPushLeft(action_i, res_dominos, updated, queue)
+            attemptPushLeft(action_i, res_dominos, queue)
     return ''.join(res_dominos)
 
 def attemptPushRight(action_i, res_dominos, queue):
