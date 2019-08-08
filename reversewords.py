@@ -24,4 +24,24 @@ print("reversed: \'{w}\'".format(w=reverse_words(word)))
 
 def reverse_words2(arr: list) -> list:
     # implementation
-    return None
+    reverse(arr, 0, len(arr)-1) # reverse the whole array
+    start = 0
+    for i in range(len(arr)):
+        if arr[i] == ' ' and i-1 >= 0: # check to see if we're on a delimiter
+            reverse(arr, start, i-1)
+            start = i+1 # place start after the delimiter
+    reverse(arr, start, len(arr)-1) # reverse the last word
+    return arr
+        
+
+def reverse(arr: list, start: int, finish: int):
+    while start < finish:
+        temp = arr[start]
+        arr[start] = arr[finish]
+        arr[finish] = temp
+        start += 1
+        finish -=1
+    
+word
+word_list = [c for c in word]
+print("".join(reverse_words2(word_list)))
