@@ -22,9 +22,7 @@
 # to see if I am using the index that contais the max_i position or the min_i position, I then
 # multiply it through if I'm not using one of those and take the max with my current max product!!!
 
-# we have now decreased the complexity to O(n^2) time and O(1) space!!!! Let's go. And I was able
-# to do this in 15 mins which shows so much progress!!! WOOT WOOT. Let's go! Keep you head up and
-# keep coding! Cheers, Brady
+# we have now decreased the complexity to O(n^2) time and O(1) space!!!! But wait, can we do better...
 
 def three_num_max_product(nums):
     min_pos = nums.index(min(nums))
