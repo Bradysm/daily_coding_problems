@@ -28,11 +28,13 @@ def k_closest_points(points, cpoint, k):
 
         # check to see if we don't have k already
         # insertion into the heap is log(k)
-        if len(k_nearest) < k: heapq.heappush(k_nearest, (-1 * distance, point))
-        else: heapq.heappushpop(k_nearest, (-1 * distance, point))
+        if len(k_nearest) < k: 
+            heapq.heappush(k_nearest, (-1 * distance, point))
+        else: 
+            heapq.heappushpop(k_nearest, (-1 * distance, point))
 
     return [point for _, point in k_nearest]
 
 
-print(k_closest_points([(0, 0), (5, 4), (3, 1)], (1, 2), 2))
+print(k_closest_points([(0, 0), (5, 4), (3, 1), (100, 1), (1, 2)], (1, 2), 2))
 
