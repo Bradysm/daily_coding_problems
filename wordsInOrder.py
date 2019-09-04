@@ -16,6 +16,11 @@
 #Output: True
 #Explanation: The words are in increasing alphabetical order
 
+# sorry that I'm getting lazy with the explinations. I just signed with Capital One and haven't had
+# the motivation to write as much in the comments. Im going to slowly come back to doing interview problems
+# I was taking a break because it's so stressful and I just wanted some time to clear my head
+
+
 # O(n*s) time and O(1) space (this is assuming the character set is constant so the dictionary will always be constant space)
 def words_in_order(words: list , order: str) -> list:
     letter_order = {order[i]: i for i in range(len(order))} # create the mapping of the letters to the order they're in
