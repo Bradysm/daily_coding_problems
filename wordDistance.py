@@ -6,7 +6,8 @@
 # text content of "dog cat hello cat dog dog hello cat world", 
 # return 1 because there's only one word "cat" in between the two words.
 
-
+# O(w) space where w is the number of words and the time complexity is O(w*s) where s is the longest word inputted from word1 and word2
+# due to the comparisons of the words. Note that this uses the simple "two pointer" technique
 import sys
 def word_distance(string, word1, word2):
     # split the string at the space
