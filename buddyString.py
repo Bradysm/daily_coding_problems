@@ -26,10 +26,11 @@ def buddy_string(s1, s2):
     # if they aren't the same length then it's not possible
     if not len(s1) == len(s2) or len(s1) < 2 or len(s2) < 2: 
         return False 
+
     # not the same number of characters O(1) space because fixed size alphabet
     if not Counter(s1) == Counter(s2):
         return False
-
+        
     # fille up a character index map
     s1_map = {c:[] for c in s1}
     for i in range(len(s1)):
@@ -51,3 +52,4 @@ print(buddy_string("aaaaaaabc", "aaaaaaacb"))
 print(buddy_string("ab", "ab"))
 print(buddy_string("", "ab"))
 print(buddy_string("aa", "aa"))
+print(buddy_string("ab", "cb"))
