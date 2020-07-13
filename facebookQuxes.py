@@ -14,7 +14,7 @@
  as we go back up the recursion tree to then get the minimum number possible.
 
  It is important to note that a transformation, you need to go one back becuase this could potentially cause
- the index before to now swap with the newly transformed, so you can see that i take the max of 0 and i-1
+ the index before to now swap with the newly transformed, so you can see that I take the max of 0 and i-1
  to ensure that we never create a negative index
 """
 
