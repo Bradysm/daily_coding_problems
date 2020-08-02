@@ -17,6 +17,8 @@ and the range [4, 9], return 23 (5 + 4 + 6 + 8).
 
 """
 
+import math
+
 class Node:
     def __init__(self, value=0, left=None, right=None):
         self.value = value
@@ -38,8 +40,24 @@ def sum_tree_range(root: Node, num_range:list) -> int:
     range: list witht the first element being the lower bound, and the second being the upper bound (inclusive)
     bst_root: root of the BST 
     """
+    return sum_tree_range_recursive(root, num_range, [float("-inf"), float("inf")])
+
+
+def sum_tree_range_recursive(root: Node, num_range:list, bst_range: list) -> int:
+    """
+    O(R) space and O(R) time
+    - where R represents the size of the range
+    - we only follow down the tree whne there is a path that can be within the range
+        as a result, the upper bound of recursive calls is the size of the range itself
+    """
+
     # check for base case of null root
     if not root: return 0
+
+    # check to see if BST has any path that could some within the range
+    if not intersecting_ranges(bst_range, num_range): 
+        print("not intersecting range")
+        return 0
 
     # calculate the nodes position within the range
     node_position = calculate_range_position(root.value, num_range)
@@ -50,16 +68,20 @@ def sum_tree_range(root: Node, num_range:list) -> int:
     # the current node has a value less than the range (or within range and still need to expore), so move to the right
     # SOLVE TO THE RIGHT
     if node_position == -1 or node_position == 0: 
-        range_sum += sum_tree_range(root.right, num_range)
+        print("Moving right", [root.value, bst_range[1]])
+        range_sum += sum_tree_range_recursive(root.right, num_range, [root.value, bst_range[1]])
 
     # the current node has a value greater than the range (or within range and still need to expore), so move to the left
     # SOLVE TO THE LEFT
     if node_position == 1 or node_position == 0:
-        range_sum += sum_tree_range(root.left, num_range)
+        print("Moving left", [bst_range[0], root.value])
+        range_sum += sum_tree_range_recursive(root.left, num_range, [bst_range[0], root.value])
 
     return range_sum
 
 
+
+# DOES NOT HAVE THE BST RANGE OPTIMIZATION
 def sum_tree_range_iterative(root: Node, num_range: list) -> int:
     range_sum = 0
     stack = [root] if root else []
@@ -85,6 +107,9 @@ def sum_tree_range_iterative(root: Node, num_range: list) -> int:
     return range_sum  
 
 
+def intersecting_ranges(a, b) -> bool:
+    intersection = min(a[1], b[1]) - max(a[0], b[0])
+    return True if intersection > 0 else False
 
 def calculate_range_position(node_value: int, num_range: list) -> int:
     """
@@ -111,10 +136,13 @@ two = Node(value=2)
 four = Node(value=4)
 six = Node(value=6)
 ten = Node(value=10)
+eleven = Node(value=11, left=ten)
+sixteen = Node(value=16, left=eleven)
+
 
 # second level
 three = Node(value=3, right=four, left=two)
-eight = Node(value=8, right=ten, left=six)
+eight = Node(value=8, right=sixteen, left=six)
 
 # top level
 five = Node(value=5, right=eight, left=three)
