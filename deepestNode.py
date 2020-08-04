@@ -49,14 +49,15 @@ def deepest(node):
     while queue:
         # pop off the front of the queue
         node_and_level = queue.pop(0)
-        node, node_level = node_and_level
+        curr_node, curr_node_level = node_and_level
 
         # update the deepest node in a fancy way using max
         deepest_node = max(deepest_node, node_and_level, key=lambda x: x[1])
         
         # add children to the queue if there are any
-        if node.right: queue.append((node.right, node_level + 1))
-        if node.left: queue.append(( node.left, node_level + 1))
+        next_level = curr_node_level + 1
+        if curr_node.right: queue.append((curr_node.right, next_level))
+        if curr_node.left: queue.append((curr_node.left, next_level))
 
     return deepest_node
 
