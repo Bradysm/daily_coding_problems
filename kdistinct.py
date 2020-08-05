@@ -21,6 +21,13 @@ I guess, we will just use that and then call it a day from there. Let's do it
 from collections import defaultdict
 
 def longest_substring_k_distinct(s, k) -> int:
+    """
+    We pass over each of the characters in the string 2 times in the worst case, so
+    the time complexity is O(n), we use a counter for the characters in the string,
+    since there are only 26 characters in the alphabet, we use O(1) space because
+    the character size does not depend on the input. TADA! We killed it!
+    
+    """
     if not s: return 0
 
     # max length
