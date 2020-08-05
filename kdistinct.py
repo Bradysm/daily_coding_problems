@@ -39,7 +39,8 @@ def longest_substring_k_distinct(s, k) -> int:
     num_characters = 1
 
     # create fast and slow pointers
-    slow = fast = 0 # assume that the left pointer shows what is currently contained and the next index of the right pointer is what is in question
+    # assume that the left pointer shows what is currently contained and the next index of the right pointer is what is in question
+    slow = fast = 0 
 
     while slow < len(s) and fast + 1 < len(s):
         # get the next character
@@ -47,11 +48,9 @@ def longest_substring_k_distinct(s, k) -> int:
         
         # if the number of characters is less than k, then add that character to the set
         if num_characters < k:
-            num_characters += 0 if counts[next_char] is not 0 else 1
-            counts[next_char] += 1
-
-            # move the fast pinter
-            fast += 1
+            num_characters += 1 if counts[next_char] is 0 else 0 # add to the num of characters if that character is not in the set
+            counts[next_char] += 1 # update the counter
+            fast += 1 # move the fast pointer
         elif counts[next_char] is 0: # k is at max capacity and the next character is not in the current seen set
             # move the slow forward and remove the character from the count
             counts[s[slow]] -= 1
