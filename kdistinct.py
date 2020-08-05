@@ -38,26 +38,44 @@ def longest_substring_k_distinct(s, k) -> int:
         # get the next character
         next_char = s[fast+1]
         
-        # if the number of characters is less than k, then add
+        # if the number of characters is less than k, then add that character to the set
         if num_characters < k:
             num_characters += 0 if counts[next_char] is not 0 else 1
             counts[next_char] += 1
 
             # move the fast pinter
             fast += 1
-        else: # current number of characters is equal to k
-            if counts[next_char] is 0: # the next character is not in the counts
-                # move the slow
-                counts[s[slow]] -= 1
-                num_characters -= 1 if counts[s[slow]] is 0 else 0 # remove total numbers if the character removed removed the last character
-                slow += 1
-            else:
-                counts[next_char] += 1
-                fast += 1
+        elif counts[next_char] is 0: # k is at max capacity and the next character is not in the current seen set
+            # move the slow forward and remove the character from the count
+            counts[s[slow]] -= 1
 
+            # if there are no more of the characters in the seen set, remove it then move up the slow
+            num_characters -= 1 if counts[s[slow]] is 0 else 0 
+            slow += 1
+        else: # the current character is in the seen set and k is equal to max character
+            # add the count and move the fast forward
+            counts[next_char] += 1
+            fast += 1
+
+
+        # get the max length
         max_lenth = max(max_lenth, (fast + 1 - slow))
 
     return max_lenth
 
 
-print(longest_substring_k_distinct("abcba", 2))
+# testing 
+s1 = "abcba"
+print("Test1 {s}:".format(s=s1), longest_substring_k_distinct(s1, 2))
+
+
+s2 = "abcbbbca"
+print("Test1 {s}:".format(s=s2), longest_substring_k_distinct(s2, 2))
+
+
+s3 = "abcbzzzbbca"
+print("Test1 {s}:".format(s=s3), longest_substring_k_distinct(s3, 2))
+
+
+s4 = "abcbzzcczbbca"
+print("Test1 {s}:".format(s=s4), longest_substring_k_distinct(s4, 3))
