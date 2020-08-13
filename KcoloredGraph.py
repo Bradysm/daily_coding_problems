@@ -27,7 +27,7 @@ def solve_csp(curr_node, node_values, graph, k):
     for value in range(k):
         node_values[curr_node] = value
 
-        # check to see if the current 
+        # check to see if the current node coloring is valid, then check to see if we can create a valid coloring
         if valid_constraints(curr_node, graph, node_values) and solve_csp(next_node, node_values, graph, k):
             return True
         
