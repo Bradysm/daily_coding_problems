@@ -20,6 +20,7 @@ def k_coloring(graph, k):
 def solve_csp(curr_node, node_values, graph, k):
     # check to see if the current node is greater than the length of the grapp
     # then return true because we've assigned values that align with constraints
+    # and have no more nodes to check. Also a graph with no nodes in it can be valid with any k of colors
     if curr_node >= len(graph): return True
 
     # pick a value, check to see if valid, if valid move to next node otherwise, try agian
@@ -33,6 +34,7 @@ def solve_csp(curr_node, node_values, graph, k):
         
         # not valid or not a valid selection, backtrack and try a new value
 
+    # did not find a valid coloring for the current orientation return false
     return False
     
 
@@ -56,8 +58,16 @@ test_graph = [
     [1, 0, 0 ,0]
 ]
 
+test_graph_2 = [
+    [0, 1, 1],
+    [1, 0, 0],
+    [1, 0, 0]
+]
+
 
 
 
 print(k_coloring(test_graph, 3)) # this should be true because you should be able to color anything with three colors
 print(k_coloring(test_graph, 2)) # this is false because you get stuck with the dependency at assigning to the node 2
+
+print(k_coloring(test_graph_2, 2)) # this is true, set 0 to value 0 and then node 1 and 2 to value 1
