@@ -9,6 +9,9 @@ Given the mapping a = 1, b = 2, ... z = 26, and an encoded message, count the nu
 For example, the message '111' would give 3, since it could be decoded as 'aaa', 'ka', and 'ak'.
 
 You can assume that the messages are decodable. For example, '001' is not allowed.
+
+
+NOW VALID SOLUTION. FIXED ISSUES
 """
 
 
@@ -48,7 +51,6 @@ def find_num_ways_decode_iterative(s) -> int:
 
     return ways_decode[0]
 
-    
 print('Recursive', find_number_of_ways_to_decode('11111'))
 print('Iterative', find_num_ways_decode_iterative('11111'))
 
