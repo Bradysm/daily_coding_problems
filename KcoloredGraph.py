@@ -6,6 +6,10 @@ This problem was asked by Google.
 Given an undirected graph represented as an adjacency matrix and an integer k, 
 write a function to determine whether each vertex in the graph can be colored 
 such that no two adjacent vertices share the same color using at most k colors.
+
+
+O(n) space where n is the number of nodes in the graph
+O(n*n*k) time beacuse at every node you at the worst go through every value and check every dependency edge
 """
 
 def k_coloring(graph, k):
