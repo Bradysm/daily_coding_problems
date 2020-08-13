@@ -50,14 +50,12 @@ of the current node.
 """
 from tree import Tree
 
-
-
 def bottom_view_tree(root: Tree) -> list:
     # dictionary to store the horizontal distances
     horizontal_distances = {}
     queue = [] if not root else [(root, 0)] # (node, hd)
 
-    # get the lowest horizontal distances
+    # while there are still tuples in the queue, get the lowest horizontal distances
     while queue:
         # get the current node
         node, hd = queue.pop()
@@ -78,4 +76,15 @@ def bottom_view_tree(root: Tree) -> list:
 test_tree = Tree(5, Tree(7, Tree(9,left=Tree(8)), left=Tree(6)), left=Tree(3, Tree(4), left=Tree(1, left=Tree(0))))
 
 
+"""
+        10(0)
+       /  \
+  (-1)1    15(1)
+           /
+          12(0)
+
+"""
+test_tree_2 = Tree(10, left=Tree(1), right=Tree(15, left=Tree(12)))
+
 print(bottom_view_tree(test_tree))
+print(bottom_view_tree(test_tree_2))
