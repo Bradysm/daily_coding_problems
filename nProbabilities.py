@@ -41,9 +41,19 @@ def n_number_probability_generator(nums, probabilities) -> int:
     Takes the numbers and their respective probabilities and returns
     the numbers
     """
-    prob_array = []
+    prob_array = [nums[0]] * 100
+    curr_index = 0
+    
     for num, prob in zip(nums, probabilities):
-        prob_array += ([num] * int(prob * 100))
+        # calculate the number of array indexes to give the number
+        number_of_slots = int(prob * 100)
+
+        # update slots in probability array
+        for i in range(curr_index, curr_index+number_of_slots):
+            if i < len(prob_array): prob_array[i] = num
+
+        # update where we are in the probability array
+        curr_index = curr_index + number_of_slots
 
     # pick a random index
     random_index = int(100 * random())
