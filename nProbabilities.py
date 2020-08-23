@@ -23,10 +23,6 @@ a random number from 0-1 to get the index of the number that we chose. We would 
 multiply the random number by 100 and reach into the box and return that number (or
 simply look into the array and return the number that is stored at that index).
 
-I do realize that my implementation could run into some errors when the rounding
-of the probabilities doesn't work out right and might have an array of size 99,
-but you select the 100th box. This is an issue that i need to handle. When I look
-back over this problem.
 
 This takes O(1) space since the array does not depend on the size of input, and
 takes O(n) time becuase we need to go through each of the numbers in the input.
@@ -43,7 +39,7 @@ def n_number_probability_generator(nums, probabilities) -> int:
     """
     prob_array = [nums[0]] * 100
     curr_index = 0
-    
+
     for num, prob in zip(nums, probabilities):
         # calculate the number of array indexes to give the number
         number_of_slots = int(prob * 100)
