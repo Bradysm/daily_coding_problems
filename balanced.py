@@ -25,7 +25,22 @@ We then will create a recursive function that keeps getting called until
 the tree node that we're at is a leaf. At this point we know the subtrees
 are balanced becuase they're both null and we know that the height of the
 leaf. People define this differently but for this problem, im just going
-to define the height of a leaf as 1. It's perfectly fine to start at 0
+to define the height of a leaf as 0. It's perfectly fine to start at 1
+if that's you kind of thing. We can then give the calling node enough
+information to make it's judgement by giving it back the height of
+our node and whether it's subtrees were balanced. Then the calling node
+will take our two heights and see if they differ no more than 1, and will
+also check to see if their subtrees were balacned below it, becuase
+just becuase the current nodes height are not off by more than one. it's important
+to consider the nodes below them and if they were off by more than one.
+
+If both subtrees were balanced and their heights differed by no more than
+1, then we can calculate the height of the current node and then 
+returning true for the current node being balanced. Otherwise, we can
+calculate the height and return false to let the calling node know that
+the subbtree below it, at some point, was not balance.
+
+Cheers!
 
 """
 

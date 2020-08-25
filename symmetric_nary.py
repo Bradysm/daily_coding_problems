@@ -23,6 +23,9 @@ def check_roots_symmertric(root1, root2=None):
     # check to see if it's the center of a a new tree
     root2_children = root2.children if root2 else root1_children
     
+    # has to be done because zip will only create an iterator
+    # up to the length of the shortest, so there could be an 
+    # outlier when there is an extra element but everything else is symmetric
     symmetric = True if len(root2_children) == len(root1_children) else False
 
     # check to see if the children are symmetric
@@ -32,6 +35,7 @@ def check_roots_symmertric(root1, root2=None):
             break
 
     return symmetric
+
 
 def create_stack(root, root2=None):
     stack = []
