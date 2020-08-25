@@ -47,7 +47,7 @@ def merge_srot(head: LLNode) -> LLNode:
 
     # conquer both halves into one list and retunr the list
     sorted_ll = None
-    sorted_ll_last = None
+    sorted_ll_tail = None
 
     # while there are still elements in both lsits
     while left_sorted and right_sorted:
@@ -65,19 +65,19 @@ def merge_srot(head: LLNode) -> LLNode:
         smallest_node.next = None
 
         # add the smallest node to the new list
-        if not sorted_ll_last:
+        if not sorted_ll_tail:
             sorted_ll = smallest_node
-            sorted_ll_last = smallest_node
+            sorted_ll_tail = smallest_node
         else:
-            sorted_ll_last.next = smallest_node
-            sorted_ll_last = smallest_node
+            sorted_ll_tail.next = smallest_node
+            sorted_ll_tail = smallest_node
 
     # add remaining elements
     if left_sorted:
-        sorted_ll_last.next = left_sorted
+        sorted_ll_tail.next = left_sorted
     
     if right_sorted:
-        sorted_ll_last.next = right_sorted
+        sorted_ll_tail.next = right_sorted
 
     return sorted_ll
 
